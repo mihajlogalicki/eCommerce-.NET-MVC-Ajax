@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 namespace OnlineShop.ApiServices
 {
     public class CategoryServices
     {
-        public void CreateCategory(Category category)
+        public void SaveCategory(Category category)
         {
             using (var context = new DatabaseContext())
             {
@@ -25,5 +26,32 @@ namespace OnlineShop.ApiServices
                 return context.Categories.ToList();
             }
         }
+
+        public Category GetCategoryById(int category)
+        {
+            using (var context = new DatabaseContext())
+            {
+                return context.Categories.Find(category);
+            }
+        }
+
+        public void UpdateCategory(Category category)
+        {
+            using (var context = new DatabaseContext())
+            {
+                context.Entry(category).State = EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+
+        public void DeleteCategory(Category category)
+        {
+            using (var context = new DatabaseContext())
+            {
+                context.Entry(category).State = EntityState.Deleted;
+                context.SaveChanges();
+            }
+        }
+
     }
 }

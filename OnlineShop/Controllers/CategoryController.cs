@@ -28,7 +28,35 @@ namespace OnlineShop.Controllers
         [HttpPost]
         public ActionResult Create(Category category)
         {
-            _apiService.CreateCategory(category);
+            _apiService.SaveCategory(category);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet] // Template Form for Edit category
+        public ActionResult Edit(int id)
+        {
+            var category = _apiService.GetCategoryById(id);
+            return View(category);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Category category)
+        {
+            _apiService.UpdateCategory(category);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var category = _apiService.GetCategoryById(id);
+            return View(category);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Category category)
+        {
+            _apiService.DeleteCategory(category);
             return RedirectToAction("Index");
         }
     }

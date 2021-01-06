@@ -9,6 +9,10 @@
 <ul>
     @foreach(var category in Model)
     {
-    <li>@category.Name - @category.Description</li>
+    <li>
+        @category.Name - @category.Description
+        <a href="/Category/Edit/@category.Id">Edit</a>
+        <a href="/Category/Delete/@category.Id">Delete</a>
+    </li>
     }
 </ul>
