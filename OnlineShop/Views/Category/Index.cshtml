@@ -1,0 +1,14 @@
+﻿@model List<OnlineShop.Entities.Category>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Categories</h2>
+
+<a href="/Category/Create">Add Category</a>
+<ul>
+    @foreach(var category in Model)
+    {
+    <li>@category.Name - @category.Description</li>
+    }
+</ul>
