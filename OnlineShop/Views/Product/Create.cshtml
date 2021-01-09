@@ -4,16 +4,32 @@
 }
 
 <h2>Create Product</h2>
-<form method="post">
+<form id="form-product-creation">
     <label>Name</label>
-    <input type="text" name="name" /><br />
+    <input type="text" id="name" name="Name" /><br />
 
     <label>Description</label>
-    <input type="text" name="Description" /><br />
+    <textarea id="description" name="Description" rows="1" cols="50"></textarea><br />
 
     <label>Price</label>
-    <input type="text" name="Price" /><br />
+    <input type="text" id="price" name="Price" /><br />
 
-    <button>Save</button>
+    <button type="button" id="save-product">Save</button>
 </form>
+
+<script>
+        $("#save-product").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/Product/Create",
+                data: $("#form-product-creation").serialize()
+            }).done(function (response) {
+                $('#action-container').html("");
+                $('#form').remove();
+                $('#table-data').html(response);
+            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Fail");
+            });
+        });
+</script>
 
