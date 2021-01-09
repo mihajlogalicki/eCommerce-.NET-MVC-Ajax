@@ -11,11 +11,6 @@ namespace OnlineShop.Controllers
     public class ProductController : Controller
     {
         private readonly ProductServices _apiService = new ProductServices();
-        // GET: Products
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         public ActionResult ProductTable(string search)
         {
@@ -39,6 +34,27 @@ namespace OnlineShop.Controllers
         public ActionResult Create(Product product)
         {
             _apiService.SaveProduct(product);
+            return RedirectToAction("ProductTable");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var product = _apiService.GetProductById(id);
+            return View(product);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Product product)
+        {
+            _apiService.UpdateProduct(product);
+            return RedirectToAction("ProductTable");
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Product product)
+        {
+            _apiService.DeleteProduct(product);
             return RedirectToAction("ProductTable");
         }
     }
