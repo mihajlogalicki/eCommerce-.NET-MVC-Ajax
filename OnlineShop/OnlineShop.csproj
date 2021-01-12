@@ -185,6 +185,10 @@
     <Compile Include="Migrations\202101061924345_initialization.Designer.cs">
       <DependentUpon>202101061924345_initialization.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101121817004_ImageUrlEntityAdded.cs" />
+    <Compile Include="Migrations\202101121817004_ImageUrlEntityAdded.Designer.cs">
+      <DependentUpon>202101121817004_ImageUrlEntityAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -554,6 +558,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202101061924345_initialization.resx">
       <DependentUpon>202101061924345_initialization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101121817004_ImageUrlEntityAdded.resx">
+      <DependentUpon>202101121817004_ImageUrlEntityAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
