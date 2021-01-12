@@ -13,10 +13,10 @@ namespace OnlineShop.Controllers
         private readonly CategoryServices _apiService = new CategoryServices(); 
 
         [HttpGet]
-        public ActionResult Index()
+        public JsonResult Index()
         {
             List<Category> categories = _apiService.GetAllCategories();
-            return View(categories);
+            return Json(categories);
         }
 
         [HttpGet] // Template Form for adding category
