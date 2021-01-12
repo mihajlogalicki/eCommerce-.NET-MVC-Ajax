@@ -12,13 +12,14 @@
     <input type="text" name="Description" /><br />
 
     <label>Image</label>
+    <input name="ImageUrl" id="ImageUrl" type="hidden"/>
     <input id="imageUpload" type="file" name="Image" accept=".png, .jpg"/><br />
 
     <div class="thumb">
         <img id="categoryImage" width="100"/>
     </div>
 
-    <button type="button">Save</button>
+    <button type="submit">Save</button>
 </form>
 
 <script>
@@ -44,6 +45,7 @@
             console.log(response);
             $('#form').remove();
             if (response.Success) {
+                $("#ImageUrl").val(response.ImageUrl);
                 $("#categoryImage").attr("src", response.ImageUrl);
             }
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {

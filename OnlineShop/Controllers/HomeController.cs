@@ -1,4 +1,7 @@
-﻿using System;
+﻿using OnlineShop.ApiServices;
+using OnlineShop.Entities;
+using OnlineShop.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +11,14 @@ namespace OnlineShop.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly CategoryServices _apiService = new CategoryServices();
+
         public ActionResult Index()
         {
-            return View();
+            HomeViewModel model = new HomeViewModel();
+            model.Categories = _apiService.GetAllCategories();
+
+            return View(model);
         }
 
         public ActionResult About()
