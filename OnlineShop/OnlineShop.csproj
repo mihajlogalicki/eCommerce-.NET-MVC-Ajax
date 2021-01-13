@@ -181,13 +181,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202101061924345_initialization.cs" />
-    <Compile Include="Migrations\202101061924345_initialization.Designer.cs">
-      <DependentUpon>202101061924345_initialization.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101121817004_ImageUrlEntityAdded.cs" />
-    <Compile Include="Migrations\202101121817004_ImageUrlEntityAdded.Designer.cs">
-      <DependentUpon>202101121817004_ImageUrlEntityAdded.cs</DependentUpon>
+    <Compile Include="Migrations\202101132125108_initializing.cs" />
+    <Compile Include="Migrations\202101132125108_initializing.Designer.cs">
+      <DependentUpon>202101132125108_initializing.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -557,11 +553,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101061924345_initialization.resx">
-      <DependentUpon>202101061924345_initialization.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101121817004_ImageUrlEntityAdded.resx">
-      <DependentUpon>202101121817004_ImageUrlEntityAdded.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101132125108_initializing.resx">
+      <DependentUpon>202101132125108_initializing.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -9,7 +9,7 @@ namespace OnlineShop.Database
 {
     public class DatabaseContext : DbContext
     {
-        public DatabaseContext() : base("WebShopDB") {}
+        public DatabaseContext() : base("MultiWebShop") {}
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }

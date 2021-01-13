@@ -27,7 +27,9 @@ namespace OnlineShop.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            CategoryServices serviceCategory = new CategoryServices();
+            var categories = serviceCategory.GetAllCategories();
+            return View(categories);
         }
 
         [HttpPost]

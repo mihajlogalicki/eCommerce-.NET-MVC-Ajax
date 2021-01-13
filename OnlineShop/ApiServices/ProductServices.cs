@@ -23,7 +23,7 @@ namespace OnlineShop.ApiServices
         {
             using (var context = new DatabaseContext())
             {
-                return context.Products.ToList();
+                return context.Products.Include(c => c.Category).ToList();
             }
         }
 
