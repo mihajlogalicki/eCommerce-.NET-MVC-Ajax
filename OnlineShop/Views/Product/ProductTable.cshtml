@@ -5,19 +5,37 @@
 
 <div>
     <form method="post">
-        <input id="search-text" type="text" name="search" />
-        <button type="button" id="search-btn">Search</button>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label>Search</label>
+                    <input class="form-control" id="search-text" type="text" name="search" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Action</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="form-control btn btn-danger" type="button" id="search-btn">Search</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="form-control btn btn-danger" type="button" id="add-btn">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
-    <button type="button" id="add-btn">Add</button>
 </div>
 
 <div>
-    <table class="table table-bordered">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <td>Product Name</td>
                 <td>Category</td>
-                <td>Pricate</td>
+                <td>Price</td>
                 <td>Actions</td>
             </tr>
         </thead>
