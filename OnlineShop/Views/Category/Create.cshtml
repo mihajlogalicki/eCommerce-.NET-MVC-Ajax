@@ -4,7 +4,7 @@
 }
 
 <h2>Create Category</h2>
-<form method="post">
+<form id="add-category-form" method="post">
     <label>Name</label>
     <input type="text" name="name" /><br />
 
@@ -12,14 +12,18 @@
     <input type="text" name="Description" /><br />
 
     <label>Image</label>
-    <input name="ImageUrl" id="ImageUrl" type="hidden"/>
-    <input id="imageUpload" type="file" name="Image" accept=".png, .jpg"/><br />
+    <input name="ImageUrl" id="ImageUrl" type="hidden" />
+    <input id="imageUpload" type="file" name="Image" accept=".png, .jpg" /><br />
 
     <div class="thumb">
-        <img id="categoryImage" width="100"/>
+        <img id="categoryImage" width="100" />
     </div>
 
-    <button type="submit">Save</button>
+    <label>Is Featured ?</label>
+    <input type="radio" name="IsFeatured" value="true"/> YES
+    <input type="radio" name="IsFeatured" value="false"/> NO<br />
+
+    <button id="save-category" type="submit">Save</button>
 </form>
 
 <script>
@@ -42,8 +46,6 @@
             processData: false,
             contentType: false
         }).done(function (response) {
-            console.log(response);
-            $('#form').remove();
             if (response.Success) {
                 $("#ImageUrl").val(response.ImageUrl);
                 $("#categoryImage").attr("src", response.ImageUrl);

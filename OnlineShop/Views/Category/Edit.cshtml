@@ -1,15 +1,23 @@
 ﻿@model Category
 @{
     ViewBag.Title = "Edit";
+
+    var checkerTrue = Model.IsFeatured ? "checked" : string.Empty;
+    var checkerFalse = !Model.IsFeatured ? "checked" : string.Empty;
+
 }
 
 <h2>Edit Category</h2>
 <form method="post">
     <label>Name</label>
-    <input type="text" name="name"  value="@Model.Name"/><br />
+    <input type="text" name="name" value="@Model.Name" /><br />
 
     <label>Description</label>
-    <input type="text" name="Description"value="@Model.Description"/><br />
+    <input type="text" name="Description" value="@Model.Description" /><br />
+
+    <label>Is Featured ?</label>
+    <input type="radio" name="IsFeatured" value="true" @checkerTrue/> YES
+    <input type="radio" name="IsFeatured" value="false" @checkerFalse/> NO<br />
 
     <button>Save</button>
 </form>

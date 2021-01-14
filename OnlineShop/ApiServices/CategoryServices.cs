@@ -27,6 +27,14 @@ namespace OnlineShop.ApiServices
             }
         }
 
+        public List<Category> GetFeaturedCategories()
+        {
+            using (var context = new DatabaseContext())
+            {
+                return context.Categories.Where(c => c.IsFeatured && c.ImageUrl != null).ToList();
+            }
+        }
+
         public Category GetCategoryById(int category)
         {
             using (var context = new DatabaseContext())
