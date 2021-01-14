@@ -5,7 +5,9 @@
 
 <h2>Edit Product</h2>
 <form id="form-product-edition">
-    <input type="hidden" name="id" value="@Model.Id" /><br />
+    <input type="hidden" name="Id" value="@Model.Id" /><br />
+    <input type="hidden" name="CategoryId" value="@Model.CategoryId" /><br />
+
     <label>Name</label>
     <input type="text" value="@Model.Name" name="Name" /><br />
 
@@ -26,8 +28,7 @@
             data: $("#form-product-edition").serialize()
         }).done(function (response) {
             $('#action-container').html("");
-            $('#form').remove();
-            $('#table-data').html(response);
+            $('#table-container').html(response);
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Fail");
         });

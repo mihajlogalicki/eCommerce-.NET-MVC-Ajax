@@ -3,7 +3,16 @@
     ViewBag.Title = "ProductTable";
 }
 
-    <table id="table-data" class="table table-bordered">
+<div>
+    <form method="post">
+        <input id="search-text" type="text" name="search" />
+        <button type="button" id="search-btn">Search</button>
+    </form>
+    <button type="button" id="add-btn">Add</button>
+</div>
+
+<div>
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <td>Product Name</td>
@@ -26,7 +35,6 @@
                         {
                             <text>-</text>
                         }
-
                     </td>
                     <td>@product.Price</td>
                     <td>
@@ -37,16 +45,7 @@
             }
         </tbody>
     </table>
-
-    <div id="action-container">
-        <div id="form">
-            <form method="post">
-                <input id="search-text" type="text" name="search" />
-                <button type="button" id="search-btn">Search</button>
-            </form>
-            <button type="button" id="add-btn">Add</button>
-        </div>
-    </div>
+</div>
 
 <script>
     $("#search-btn").click(function () {
@@ -58,10 +57,7 @@
                 search: searchValue
             }
         }).done(function (response) {
-            $('#header').remove();
-            $('#form').remove();
-            $(".flat-row mail-chimp").remove();
-            $('#table-data').html(response);
+            $('#table-container').html(response);
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Fail");
         });
@@ -70,10 +66,8 @@
     $("#add-btn").click(function () {
         $.ajax({
             type: "GET",
-            url: "/Product/Create",
+            url: "/Product/Create"
         }).done(function (response) {
-            $('footer').remove();
-            $('#site-header-inner').remove();
             $('#action-container').html(response);
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Fail");
@@ -109,13 +103,10 @@
                     id: dataId
                 }
             }).done(function (response) {
-                $('footer').remove();
-                $('#form').remove();
-                $('#table-data').html(response);
+                $('#table-container').html(response);
             }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Fail");
             });
         }
     });
 </script>
-

@@ -12,6 +12,11 @@ namespace OnlineShop.Controllers
     {
         private readonly ProductServices _apiService = new ProductServices();
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult ProductTable(string search)
         {
             var products = _apiService.GetAllProducts();
@@ -21,7 +26,7 @@ namespace OnlineShop.Controllers
                 products = products.Where(p => p.Name.ToLower().Contains(search)).ToList();
             }
 
-            return View(products);
+            return PartialView(products);
         }
 
         [HttpGet]
@@ -29,7 +34,7 @@ namespace OnlineShop.Controllers
         {
             CategoryServices serviceCategory = new CategoryServices();
             var categories = serviceCategory.GetAllCategories();
-            return View(categories);
+            return PartialView(categories);
         }
 
         [HttpPost]
@@ -43,7 +48,7 @@ namespace OnlineShop.Controllers
         public ActionResult Edit(int id)
         {
             var product = _apiService.GetProductById(id);
-            return View(product);
+            return PartialView(product);
         }
 
         [HttpPost]
