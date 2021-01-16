@@ -1,7 +1,8 @@
-﻿@model List<Product>
+﻿@model List<Category>
 @{
-    ViewBag.Title = "ProductTable";
+    ViewBag.Title = "CategoryTable";
 }
+
 
 <div>
     <form method="post">
@@ -9,7 +10,7 @@
             <div class="col-md-8">
                 <div class="form-group">
                     <label>Search</label>
-                    <input class="form-control" id="search-text" type="text" name="search" />
+                    <input type="text" name="search" id="search-text" class="form-control" />
                 </div>
             </div>
             <div class="col-md-4">
@@ -17,10 +18,10 @@
                     <label>Action</label>
                     <div class="row">
                         <div class="col-md-6">
-                            <button class="form-control btn btn-danger" type="button" id="search-btn">Search</button>
+                            <button type="button" id="search-btn" class="form-control btn btn-danger">Search</button>
                         </div>
                         <div class="col-md-6">
-                            <button class="form-control btn btn-danger" type="button" id="add-btn">Add</button>
+                            <button type="button" id="add-btn" class="form-control btn btn-danger">Add</button>
                         </div>
                     </div>
                 </div>
@@ -29,48 +30,39 @@
     </form>
 </div>
 
+
 <div>
     <table class="table table-striped">
         <thead>
             <tr>
-                <td>Product Name</td>
-                <td>Category</td>
-                <td>Price</td>
+                <td>Category Name</td>
+                <td>Description</td>
                 <td>Actions</td>
             </tr>
         </thead>
         <tbody>
-            @foreach (var product in Model)
+            @foreach (var category in Model)
             {
-                <tr>
-                    <td>@product.Name</td>
-                    <td>
-                        @if (product.Category != null)
-                        {
-                            <text>@product.Category.Name</text>
-                        }
-                        else
-                        {
-                            <text>-</text>
-                        }
-                    </td>
-                    <td>@product.Price</td>
-                    <td>
-                        <button class="edit-btn" data-id="@product.Id">Edit</button>
-                        <button class="delete-btn" data-id="@product.Id">Delete</button>
-                    </td>
-                </tr>
+            <tr>
+                <td>@category.Name</td>
+                <td>@category.Description</td>
+                <td>
+                    <button class="edit-btn" data-id="@category.Id">Edit</button>
+                    <button class="delete-btn" data-id="@category.Id">Delete</button>
+                </td>
+            </tr>   
             }
         </tbody>
     </table>
 </div>
 
 <script>
+
     $("#search-btn").click(function () {
         var searchValue = $("#search-text").val();
         $.ajax({
             type: "GET",
-            url: "/Product/ProductTable",
+            url: "/Category/CategoryTable",
             data: {
                 search: searchValue
             }
@@ -81,32 +73,18 @@
         });
     });
 
-    $("#add-btn").click(function () {
-        $.ajax({
-            type: "GET",
-            url: "/Product/Create"
-        }).done(function (response) {
-            $('#action-container').html(response);
-            focusAction();
-        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("Fail");
-        });
-    });
-
     $(".edit-btn").click(function () {
-        var dataId = $(this).attr("data-id")
+        var dataId = $(this).attr("data-id");
         $.ajax({
             type: "GET",
-            url: "/Product/Edit",
+            url: "/Category/Edit",
             data: {
                 id: dataId
             }
         }).done(function (response) {
-            $('footer').remove();
+            focusAction();
             $('#action-container').html(response);
-        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("Fail");
-        });
+        })
     });
 
     $(".delete-btn").click(function () {
@@ -117,7 +95,7 @@
         if (confimDelete) {
             $.ajax({
                 type: "POST",
-                url: "/Product/Delete",
+                url: "/Category/Delete",
                 data: {
                     id: dataId
                 }
@@ -129,6 +107,15 @@
         }
     });
 
+    $("#add-btn").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/Category/Create"
+        }).done(function (response) {
+            focusAction();
+            $('#action-container').html(response);
+        })
+    });
 
     function focusAction() {
         $('html, body').animate({

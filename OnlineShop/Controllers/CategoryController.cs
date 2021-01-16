@@ -15,14 +15,25 @@ namespace OnlineShop.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<Category> categories = _apiService.GetAllCategories();
-            return View(categories);
+            return View();
+        }
+
+        public ActionResult CategoryTable(string search)
+        {
+            var categories = _apiService.GetAllCategories();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                categories = categories.Where(p => p.Name != null && p.Name.ToLower().Contains(search.ToLower())).ToList();
+            }
+
+            return PartialView(categories);
         }
 
         [HttpGet] // Template Form for adding category
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
@@ -36,14 +47,14 @@ namespace OnlineShop.Controllers
         public ActionResult Edit(int id)
         {
             var category = _apiService.GetCategoryById(id);
-            return View(category);
+            return PartialView(category);
         }
 
         [HttpPost]
         public ActionResult Edit(Category category)
         {
             _apiService.UpdateCategory(category);
-            return RedirectToAction("Index");
+            return RedirectToAction("CategoryTable");
         }
 
         [HttpGet]

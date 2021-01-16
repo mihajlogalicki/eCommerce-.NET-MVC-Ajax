@@ -3,16 +3,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>List of Categories</h2>
 
-<a href="/Category/Create">Add Category</a>
-<ul>
-    @foreach(var category in Model)
-    {
-    <li>
-        @category.Name - @category.Description
-        <a href="/Category/Edit/@category.Id">Edit</a>
-        <a href="/Category/Delete/@category.Id">Delete</a>
-    </li>
+<div id="table-container">
+    @{
+        Html.RenderAction("CategoryTable");
     }
-</ul>
+    <div id="action-container">
+
+    </div>
+</div>

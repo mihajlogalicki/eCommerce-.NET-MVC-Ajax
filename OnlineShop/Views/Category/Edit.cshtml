@@ -5,20 +5,55 @@
     var checkerTrue = Model.IsFeatured ? "checked" : string.Empty;
     var checkerFalse = !Model.IsFeatured ? "checked" : string.Empty;
 
+    var imageUrl = !string.IsNullOrEmpty(Model.ImageUrl) ? Model.ImageUrl : "/Content/images/download.png";
+
 }
 
 <h2>Edit Category</h2>
-<form method="post">
-    <label>Name</label>
-    <input type="text" name="name" value="@Model.Name" /><br />
+<form id="form-category-edition">
+    <input type="hidden" name="Id" value="@Model.Id" /><br />
 
-    <label>Description</label>
-    <input type="text" name="Description" value="@Model.Description" /><br />
-
-    <label>Is Featured ?</label>
-    <input type="radio" name="IsFeatured" value="true" @checkerTrue/> YES
-    <input type="radio" name="IsFeatured" value="false" @checkerFalse/> NO<br />
-
-    <button>Save</button>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" class="form-control" value="@Model.Name" /><br />
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" name="Description" class="form-control" value="@Model.Description" /><br />
+            </div>
+            <div class="form-group">
+                <label>Is Featured ?</label>
+                <div class="input-group">
+                    <div class="radio form-control">
+                        <label><input type="radio" name="IsFeatured" value="true" @checkerTrue /> YES</label>
+                    </div>
+                    <div class="radio form-control">
+                        <label><input type="radio" name="IsFeatured" value="false" @checkerTrue /> No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumb">
+                <img src="@imageUrl" class="img-thumbnail img-fluid" id="categoryImage"/>
+            </div>
+        </div>
+     </div>
+    <button id="update-category" type="button" class="btn btn-danger">Update</button>
 </form>
+
+<script>
+    $("#update-category").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Category/Edit",
+            data: $("#form-category-edition").serialize()
+        }).done(function (response) {
+            $('#action-container').html("");
+            $("#table-container").html(response);
+        });
+    });
+</script>
 
