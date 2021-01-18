@@ -1,0 +1,27 @@
+﻿@model OnlineShop.ViewModels.ShopViewModel
+@{
+    ViewBag.Title = "Checkout";
+    decimal totalBill = 0;
+}
+
+@if(Model.CartProducts != null && Model.CartProducts.Count > 0)
+{
+    <div>
+        @foreach(var product in Model.CartProducts)
+        {
+            var qty = Model.CartProudctsIDs.Where(x => x == product.Id).Count();
+            totalBill = totalBill + (qty * product.Price);
+        <div>
+            Name: @product.Name - Price: @product.Price Qty: @qty Total Price: @(product.Price * qty)
+        </div>
+        }
+    </div>
+
+    <div>
+        Total Bill: @totalBill
+    </div>
+} else
+{
+    <div>No Products in Cart.</div>
+}
+

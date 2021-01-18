@@ -58,6 +58,7 @@
                     <td>
                         <button class="edit-btn" data-id="@product.Id">Edit</button>
                         <button class="delete-btn" data-id="@product.Id">Delete</button>
+                        <button class="add-to-cart" data-id="@product.Id">Add To Cart</button>
                     </td>
                 </tr>
             }
@@ -110,11 +111,16 @@
     });
 
     $(".delete-btn").click(function () {
-
         var dataId = $(this).attr("data-id")
-        var confimDelete = confirm("Are you sure you want to Delete?");
 
-        if (confimDelete) {
+        swal({
+            title: "Confirm",
+            text: "Are you sure you want to Delete this product?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+        if(willDelete) {
             $.ajax({
                 type: "POST",
                 url: "/Product/Delete",
@@ -123,12 +129,25 @@
                 }
             }).done(function (response) {
                 $('#table-container').html(response);
+                swal("Poof! Your Product has been deleted!", {
+                    icon: "success",
+                });
             }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Fail");
             });
+        } else {
+            swal("Your Product is safe!");
         }
+      });
     });
 
+    var products = [];
+
+    $(".add-to-cart").click(function () {
+        var product = $(this).attr('data-id');
+        products.push(product);
+        $.cookie("CartProducts", products.join('-'), {path: '/'});
+    });
 
     function focusAction() {
         $('html, body').animate({

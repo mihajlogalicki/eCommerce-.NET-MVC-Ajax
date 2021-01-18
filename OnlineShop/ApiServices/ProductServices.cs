@@ -35,6 +35,14 @@ namespace OnlineShop.ApiServices
             }
         }
 
+        public List<Product> GetProductsByIDs(List<int> IDs)
+        {
+            using (var context = new DatabaseContext())
+            {
+                return context.Products.Where(product => IDs.Contains(product.Id)).ToList();
+            }
+        }
+
         public void UpdateProduct(Product product)
         {
             using (var context = new DatabaseContext())

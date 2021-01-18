@@ -34,6 +34,13 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group">
+                <label>Edit Image </label>
+                <div class="radio form-control">
+                    <input name="ImageUrl" id="ImageUrl" type="hidden" />
+                    <input id="imageUpload" type="file" name="Image" accept=".png, .jpg" /><br />
+                </div>
+            </div>
         </div>
         <div class="col-md-4">
             <div class="thumb">
@@ -45,14 +52,31 @@
 </form>
 
 <script>
-    $("#update-category").click(function () {
+    $("#imageUpload").change(function () {
+        var element = this;
+
+        var formData = new FormData();
+        var totalFiles = element.files.length;
+
+        for (let i = 0; i < totalFiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
         $.ajax({
             type: "POST",
-            url: "/Category/Edit",
-            data: $("#form-category-edition").serialize()
+            url: "/Shared/UploadImage",
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType: false
         }).done(function (response) {
-            $('#action-container').html("");
-            $("#table-container").html(response);
+            if (response.Success) {
+                $("#ImageUrl").val(response.ImageUrl);
+                $("#categoryImage").attr("src", response.ImageUrl);
+            }
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
         });
     });
 </script>
