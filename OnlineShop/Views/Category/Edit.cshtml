@@ -10,7 +10,7 @@
 }
 
 <h2>Edit Category</h2>
-<form id="form-category-edition">
+<form method="post" id="form-category-edition">
     <input type="hidden" name="Id" value="@Model.Id" /><br />
 
     <div class="row">
@@ -50,34 +50,4 @@
      </div>
     <button id="update-category" type="button" class="btn btn-danger">Update</button>
 </form>
-
-<script>
-    $("#imageUpload").change(function () {
-        var element = this;
-
-        var formData = new FormData();
-        var totalFiles = element.files.length;
-
-        for (let i = 0; i < totalFiles; i++) {
-            var file = element.files[i];
-            formData.append("Photo", file);
-        }
-
-        $.ajax({
-            type: "POST",
-            url: "/Shared/UploadImage",
-            data: formData,
-            dataType: 'json',
-            processData: false,
-            contentType: false
-        }).done(function (response) {
-            if (response.Success) {
-                $("#ImageUrl").val(response.ImageUrl);
-                $("#categoryImage").attr("src", response.ImageUrl);
-            }
-        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("Fail");
-        });
-    });
-</script>
 

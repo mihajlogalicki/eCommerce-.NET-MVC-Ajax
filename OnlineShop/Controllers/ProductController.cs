@@ -10,7 +10,7 @@ namespace OnlineShop.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProductServices _apiService = new ProductServices();
+        private readonly ProductServices _apiService = ProductServices.GetSingleInstance();
 
         public ActionResult Index()
         {

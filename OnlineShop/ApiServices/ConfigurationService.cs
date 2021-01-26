@@ -7,8 +7,21 @@ using OnlineShop.Entities;
 
 namespace OnlineShop.ApiServices
 {
-    public class ConfigurationService
+    public sealed class ConfigurationService
     {
+        private static ConfigurationService _instance = null;
+
+        private ConfigurationService(){}
+
+        public static ConfigurationService GetSingleInstance()
+        {
+            if(_instance == null)
+            {
+                _instance = new ConfigurationService();
+            }
+            return _instance;
+        }
+
         public Config GetConfig(string key)
         {
             using (var context = new DatabaseContext())

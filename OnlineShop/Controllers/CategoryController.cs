@@ -8,7 +8,6 @@ using OnlineShop.ApiServices;
 
 namespace OnlineShop.Controllers
 {
-
     public class CategoryController : Controller
     {
         private readonly CategoryServices _apiService = new CategoryServices(); 
@@ -41,7 +40,7 @@ namespace OnlineShop.Controllers
         public ActionResult Create(Category category)
         {
             _apiService.SaveCategory(category);
-            return RedirectToAction("Index");
+            return RedirectToAction("CategoryTable");
         }
 
         [HttpGet] // Template Form for Edit category
@@ -69,7 +68,7 @@ namespace OnlineShop.Controllers
         public ActionResult Delete(Category category)
         {
             _apiService.DeleteCategory(category);
-            return RedirectToAction("Index");
+            return RedirectToAction("CategoryTable");
         }
     }
 }

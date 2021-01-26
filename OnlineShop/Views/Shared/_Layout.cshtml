@@ -1,5 +1,5 @@
 ﻿@{
-    ConfigurationService cfService = new ConfigurationService();
+    ConfigurationService configPrivateService = ConfigurationService.GetSingleInstance();
 }
 <!DOCTYPE html>
 <html>
@@ -176,7 +176,7 @@
                             </form>
                             <ul class="flat-social">
 
-                                <li><a href="@cfService.GetConfig("FacebookURL").Value;"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href=""><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fa fa-google"></i></a></li>
                                 <li><a href="#"><i class="fa fa-behance"></i></a></li>
@@ -227,9 +227,9 @@
                                 <a href="index.html"><img src="images/logo@2x.png" alt="image" width="107" height="24"></a>
                             </div>
                             <ul class="flat-contact">
-                                <li class="address">@cfService.GetConfig("CompanyAddress").Value;</li>
+                                <li class="address">@configPrivateService.GetConfig("CompanyAddress").Value;</li>
                                 <li class="phone">+12 345 678 910</li>
-                                <li class="email">@cfService.GetConfig("CompanyEmailAddress").Value;</li>
+                                <li class="email">@configPrivateService.GetConfig("CompanyEmailAddress").Value;</li>
                             </ul><!-- /.flat-contact -->
                         </div><!-- /.widget -->
                     </div><!-- /.col-md-3 -->

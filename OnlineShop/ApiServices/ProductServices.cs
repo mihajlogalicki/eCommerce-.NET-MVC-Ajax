@@ -8,8 +8,22 @@ using System.Web;
 
 namespace OnlineShop.ApiServices
 {
-    public class ProductServices
+    public sealed class ProductServices
     {
+
+        private static ProductServices _instance = null;
+
+        private ProductServices() {}
+
+        public static ProductServices GetSingleInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new ProductServices();
+            }
+            return _instance;
+        }
+
         public void SaveProduct(Product product)
         {
             using (var context = new DatabaseContext())
