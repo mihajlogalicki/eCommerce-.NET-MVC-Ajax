@@ -163,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiServices\CategoryServices.cs" />
+    <Compile Include="ApiServices\ConfigurationService.cs" />
     <Compile Include="ApiServices\ProductServices.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Database\DatabaseContext.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Config.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -189,6 +191,10 @@
     <Compile Include="Migrations\202101141648357_addedIsFeaturedEntity.cs" />
     <Compile Include="Migrations\202101141648357_addedIsFeaturedEntity.Designer.cs">
       <DependentUpon>202101141648357_addedIsFeaturedEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101252358456_configurations.cs" />
+    <Compile Include="Migrations\202101252358456_configurations.Designer.cs">
+      <DependentUpon>202101252358456_configurations.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -567,6 +573,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101141648357_addedIsFeaturedEntity.resx">
       <DependentUpon>202101141648357_addedIsFeaturedEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101252358456_configurations.resx">
+      <DependentUpon>202101252358456_configurations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

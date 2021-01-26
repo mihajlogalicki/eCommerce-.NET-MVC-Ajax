@@ -12,7 +12,6 @@ namespace OnlineShop.Controllers
     {
         private readonly ProductServices _apiService = new ProductServices();
 
-        
         public ActionResult Index()
         {
             return View();
