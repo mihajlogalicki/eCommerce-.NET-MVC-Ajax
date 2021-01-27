@@ -33,11 +33,12 @@ namespace OnlineShop.ApiServices
             }
         }
 
-        public List<Product> GetAllProducts()
+        public List<Product> GetAllProducts(int pageNo)
         {
+            int pageSize = 3;
             using (var context = new DatabaseContext())
             {
-                return context.Products.Include(c => c.Category).ToList();
+                return context.Products.OrderBy(x => x.Id).Skip((pageNo-1)*pageSize).Take(pageSize).Include(c => c.Category).ToList();
             }
         }
 

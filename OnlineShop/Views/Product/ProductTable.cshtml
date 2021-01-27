@@ -1,4 +1,4 @@
-﻿@model List<Product>
+﻿@model OnlineShop.ViewModels.ProductViewModel
 @{
     ViewBag.Title = "ProductTable";
 }
@@ -40,7 +40,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var product in Model)
+            @foreach (var product in Model.Products)
             {
                 <tr>
                     <td>@product.Name</td>
@@ -64,6 +64,10 @@
             }
         </tbody>
     </table>
+    <div>
+       <button class="pageButtons" disabled="@(Model.PageNo == 1)"  id="prev-records-btn" data-pageNo="@(Model.PageNo - 1)">Previous</button>
+       <button class="pageButtons" disabled="@(Model.PageNo > Model.Products.Count)" id="next-records-btn" data-pageNo="@(Model.PageNo + 1)">Next</button>
+    </div>
 </div>
 
 <script>
@@ -89,6 +93,20 @@
         }).done(function (response) {
             $('#action-container').html(response);
             focusAction();
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+    });
+
+    $(".pageButtons").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/Product/ProductTable",
+            data: {
+                PageNo: $(this).attr("data-pageNo")
+            }
+        }).done(function (response) {
+            $('#table-container').html(response);
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Fail");
         });

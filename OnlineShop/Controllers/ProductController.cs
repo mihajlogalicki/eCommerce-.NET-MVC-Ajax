@@ -1,5 +1,6 @@
 ﻿using OnlineShop.ApiServices;
 using OnlineShop.Entities;
+using OnlineShop.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,16 +18,23 @@ namespace OnlineShop.Controllers
             return View();
         }
 
-        public ActionResult ProductTable(string search)
+        public ActionResult ProductTable(string search, int? PageNo)
         {
-            var products = _apiService.GetAllProducts();
+            ProductViewModel model = new ProductViewModel();
+
+            model.PageNo = PageNo.HasValue ? PageNo.Value : 1;
+            
+
+            model.Products = _apiService.GetAllProducts(model.PageNo);
+
 
             if (!string.IsNullOrEmpty(search))
             {
-                products = products.Where(p => p.Name.ToLower().Contains(search)).ToList();
+                model.Search = search;
+                model.Products = model.Products.Where(p => p.Name.ToLower().Contains(search)).ToList();
             }
 
-            return PartialView(products);
+            return PartialView(model);
         }
 
         [HttpGet]
