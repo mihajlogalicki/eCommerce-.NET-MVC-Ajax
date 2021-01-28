@@ -1,6 +1,9 @@
 ﻿@model Product
 @{
     ViewBag.Title = "Edit";
+
+
+    var imageUrl = !string.IsNullOrEmpty(Model.ImageUrl) ? Model.ImageUrl : "/Content/images/download.png";
 }
 
 <h2>Edit Product</h2>
@@ -17,10 +20,52 @@
     <label>Price</label>
     <input type="text" value="@Model.Price" name="Price" /><br />
 
+    <div class="form-group">
+        <label>Edit Image </label>
+        <div class="radio form-control">
+            <input name="ImageUrl" id="ImageUrl" type="hidden" />
+            <input id="imageUpload" type="file" name="Image" accept=".png, .jpg" /><br />
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="thumb">
+            <img src="@imageUrl" class="img-thumbnail img-fluid" id="productImage" />
+        </div>
+    </div>
+
     <button type="button" id="update-product">Update</button>
 </form>
 
 <script>
+    $("#imageUpload").change(function () {
+        var element = this;
+
+        var formData = new FormData();
+        var totalFiles = element.files.length;
+
+        for (let i = 0; i < totalFiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Shared/UploadImage",
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType: false
+        }).done(function (response) {
+            if (response.Success) {
+                $("#ImageUrl").val(response.ImageUrl);
+                $("#productImage").attr("src", response.ImageUrl);
+            }
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+    });
+
     $("#update-product").click(function () {
         $.ajax({
             type: "POST",
