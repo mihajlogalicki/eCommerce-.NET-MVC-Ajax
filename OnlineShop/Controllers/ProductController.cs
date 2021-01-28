@@ -23,17 +23,18 @@ namespace OnlineShop.Controllers
             ProductViewModel model = new ProductViewModel();
 
             model.PageNo = PageNo.HasValue ? PageNo.Value : 1;
-            
-
             model.Products = _apiService.GetAllProducts(model.PageNo);
-
-
+           
             if (!string.IsNullOrEmpty(search))
             {
                 model.Search = search;
                 model.Products = model.Products.Where(p => p.Name.ToLower().Contains(search)).ToList();
             }
 
+            // Total Pages
+            int pageSize = 3;
+            var productCount = _apiService.GetProductsCount();
+            model.TotalPages = (int)Math.Ceiling((decimal)productCount / (decimal)pageSize);
             return PartialView(model);
         }
 

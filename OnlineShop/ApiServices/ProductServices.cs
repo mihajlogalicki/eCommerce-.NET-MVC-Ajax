@@ -50,6 +50,14 @@ namespace OnlineShop.ApiServices
             }
         }
 
+        public int GetProductsCount()
+        {
+            using (var context = new DatabaseContext())
+            {
+                return context.Products.Count();
+            }
+        }
+
         public List<Product> GetProductsByIDs(List<int> IDs)
         {
             using (var context = new DatabaseContext())
