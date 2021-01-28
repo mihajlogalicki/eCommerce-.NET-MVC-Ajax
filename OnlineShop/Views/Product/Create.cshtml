@@ -21,27 +21,65 @@
     </div>
     <div class="form-group">
         <label>Description</label>
-        <input class="form-control" id="description" name="Description" rows="1" cols="50"/>
+        <input class="form-control" id="description" name="Description" rows="1" cols="50" />
     </div>
     <div class="form-group">
         <label>Price</label>
-        <input class="form-control" id="price" name="Price" rows="1" cols="50"/>
+        <input class="form-control" id="price" name="Price" rows="1" cols="50" />
     </div>
+    <div class="form-group">
+        <label>Image</label>
+        <input name="ImageUrl" id="ImageUrl" type="hidden" />
+        <input id="imageUpload" type="file" name="Image" accept=".png, .jpg" /><br />
+
+        <div class="thumb">
+            <img id="productImage" width="100" />
+        </div>
+    </div>
+
     <button type="button" id="save-product" class="btn btn-danger">Save</button>
 </form>
 
 <script>
-        $("#save-product").click(function () {
-            $.ajax({
-                type: "POST",
-                url: "/Product/Create",
-                data: $("#form-product-creation").serialize()
-            }).done(function (response) {
-                $('#action-container').html("");
-                $('#table-container').html(response);
-            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("Fail");
-            });
+    $("#imageUpload").change(function () {
+        var element = this;
+
+        var formData = new FormData();
+        var totalFiles = element.files.length;
+
+        for (let i = 0; i < totalFiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Shared/UploadImage",
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType: false
+        }).done(function (response) {
+            if (response.Success) {
+                $("#ImageUrl").val(response.ImageUrl);
+                $("#productImage").attr("src", response.ImageUrl);
+            }
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
         });
+    });
+
+    $("#save-product").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Product/Create",
+            data: $("#form-product-creation").serialize()
+        }).done(function (response) {
+            $('#action-container').html("");
+            $('#table-container').html(response);
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+    });
 </script>
 

@@ -23,7 +23,7 @@
     <input type="radio" name="IsFeatured" value="true"/> YES
     <input type="radio" name="IsFeatured" value="false"/> NO<br />
 
-    <button id="save-category" type="submit">Save</button>
+    <button id="save-category" type="button">Save</button>
 </form>
 
 <script>
@@ -53,6 +53,17 @@
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Fail");
         });
+    });
+
+    $("#save-category").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Category/Create",
+            data: $("#add-category-form").serialize()
+        }).done(function (response) {
+            $('#table-container').html(response);
+            $('#action-container').html("");
+        })
     });
 </script>
 
