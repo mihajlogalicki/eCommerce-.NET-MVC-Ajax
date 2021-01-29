@@ -17,7 +17,7 @@
         <div class="col-md-8">
             <div class="form-group">
                 <label>Name</label>
-                <input type="text" name="name" class="form-control" value="@Model.Name" /><br />
+                <input type="text" name="Name" class="form-control" value="@Model.Name" /><br />
             </div>
             <div class="form-group">
                 <label>Description</label>
@@ -37,7 +37,7 @@
             <div class="form-group">
                 <label>Edit Image </label>
                 <div class="radio form-control">
-                    <input name="ImageUrl" id="ImageUrl" type="hidden" />
+                    <input name="ImageUrl" value="@imageUrl" id="ImageUrl" type="hidden" />
                     <input id="imageUpload" type="file" name="Image" accept=".png, .jpg" /><br />
                 </div>
             </div>
@@ -50,4 +50,92 @@
      </div>
     <button id="update-category" type="button" class="btn btn-danger">Update</button>
 </form>
+<script>
+    $("#imageUpload").change(function () {
+        var element = this;
 
+        var formData = new FormData();
+        var totalFiles = element.files.length;
+
+        for (let i = 0; i < totalFiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Shared/UploadImage",
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType: false
+        }).done(function (response) {
+            if (response.Success) {
+                $("#ImageUrl").val(response.ImageUrl);
+                $("#categoryImage").attr("src", response.ImageUrl);
+            }
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+    });
+
+    $("#form-category-edition").validate({
+        rules: {
+            Name: {
+                required: true,
+                minlength: 3,
+                maxlength: 25
+            },
+            Description: {
+                required: true,
+                minlength: 10,
+                maxlength: 90
+            },
+            Price: {
+                required: true,
+                number: true,
+                range: [0, 10000]
+            }
+        },
+        messages: {
+            Name: {
+                required: 'Name is required',
+                minlength: 'Minimum length is 5',
+                maxlength: 'Maximum length is 25'
+            },
+            Description: {
+                required: 'Description is required',
+                minlength: 'Minimum length is 5',
+                maxlength: 'Maximum length is 90'
+            },
+            Price: {
+                required: 'Price is required',
+                digit: 'Price must be digit!',
+                range: 'Maximum price is 10000!'
+            }
+        },
+        // Called when the element is invalid:
+        highlight: function (element) {
+            $(element).css('background', '#ffdddd');
+        },
+        // Called when the element is valid:
+        unhighlight: function (element) {
+            $(element).css('background', '#ffffff');
+        }
+    });
+
+    $("#update-category").click(function () {
+        if ($("#form-category-edition").valid()) {
+            $.ajax({
+                type: "POST",
+                url: "/Category/Edit",
+                data: $("#form-category-edition").serialize()
+            }).done(function (response) {
+                $('#action-container').html("");
+                $('#table-container').html(response);
+            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Fail");
+            });
+        }
+    });
+</script>

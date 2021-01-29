@@ -3,6 +3,7 @@ using OnlineShop.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 
@@ -94,8 +95,8 @@ namespace OnlineShop.ApiServices
         {
             using (var context = new DatabaseContext())
             {
-                context.Entry(product).State = EntityState.Modified;
-                context.SaveChanges();
+                 context.Entry(product).State = EntityState.Modified;
+                 context.SaveChanges();  
             }
         }
 
