@@ -34,6 +34,52 @@ namespace OnlineShop.ApiServices
             }
         }
 
+        public List<Product> SearchProducts(string search, int? minPrice, int? maxPrice, int? categoryId, int? sortBy)
+        {
+            using (var context = new DatabaseContext())
+            {
+                var products = context.Products.ToList();
+
+                if (categoryId.HasValue)
+                {
+                    products = context.Products.Where(c => c.Category.Id == categoryId.Value).ToList();
+                }
+
+                if(!string.IsNullOrEmpty(search))
+                {
+                    products = context.Products.Where(product => product.Name.Contains(search.ToLower())).ToList();
+                } 
+
+                if (minPrice.HasValue)
+                {
+                    products = context.Products.Where(product => product.Price >= minPrice.Value).ToList();
+                }
+
+                if (maxPrice.HasValue)
+                {
+                    products = context.Products.Where(product => product.Price <= maxPrice.Value).ToList();
+                }
+
+                if (sortBy.HasValue)
+                {
+                    switch (sortBy.Value)
+                    {
+                        case 2:
+                            products = context.Products.OrderByDescending(x => x.Id).ToList();
+                        break;
+                        case 3:
+                            products = context.Products.OrderBy(x => x.Price).ToList();
+                            break;
+                        case 4:
+                            products = context.Products.OrderByDescending(x => x.Price).ToList();
+                            break;
+                    }
+                }
+
+                return products;
+            }
+        }
+
         public List<Product> GetAllProducts(string search, int pageNo)
         {
             int pageSize = 3;
@@ -130,6 +176,14 @@ namespace OnlineShop.ApiServices
             {
                 context.Entry(product).State = EntityState.Deleted;
                 context.SaveChanges();
+            }
+        }
+
+        public decimal GetMaximumPrice()
+        {
+            using (var context = new DatabaseContext())
+            {
+                return (int)(context.Products.Max(x => x.Price));
             }
         }
     }

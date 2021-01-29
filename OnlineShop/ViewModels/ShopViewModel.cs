@@ -10,5 +10,9 @@ namespace OnlineShop.ViewModels
     {
         public List<Product> CartProducts { get; set; }
         public  List<int> CartProudctsIDs { get; set; }
+
+        public List<Product> Products { get; set; }
+        public List<Category> Categories { get; set; }
+        public decimal maximumPrice { get; set; }
     }
 }

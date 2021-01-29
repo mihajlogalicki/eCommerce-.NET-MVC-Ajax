@@ -169,6 +169,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Code\Enums.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -304,6 +305,7 @@
     <Content Include="Content\images\pattern\7.png" />
     <Content Include="Content\images\pattern\8.png" />
     <Content Include="Content\images\pattern\9.png" />
+    <Content Include="Content\images\shopping-cart-icon.png" />
     <Content Include="Content\images\shop\s-01.jpg" />
     <Content Include="Content\images\shop\s-02.jpg" />
     <Content Include="Content\images\shop\s-03.jpg" />
@@ -550,6 +552,7 @@
     <Content Include="Views\Shop\Checkout.cshtml" />
     <Content Include="Views\Widgets\Products.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Shop\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

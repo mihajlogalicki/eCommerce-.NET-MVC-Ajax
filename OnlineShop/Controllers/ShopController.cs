@@ -11,6 +11,17 @@ namespace OnlineShop.Controllers
     public class ShopController : Controller
     {
         private readonly ProductServices _apiService = ProductServices.GetSingleInstance();
+        private readonly CategoryServices _CatApiService = new CategoryServices();
+
+        public ActionResult index(string search, int? minPrice, int? maxPrice, int? categoryId, int? sortBy)
+        {
+            ShopViewModel ShopVM = new ShopViewModel();
+
+            ShopVM.Categories = _CatApiService.GetAllCategories();
+            ShopVM.maximumPrice = _apiService.GetMaximumPrice();
+            ShopVM.Products = _apiService.SearchProducts(search, minPrice, maxPrice, categoryId, sortBy);
+            return View(ShopVM);
+        }
 
         public ActionResult Checkout()
         {
