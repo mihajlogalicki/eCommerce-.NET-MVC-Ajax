@@ -44,8 +44,15 @@ namespace OnlineShop.Controllers
         [HttpPost]
         public ActionResult Create(Product product)
         {
-            _apiService.SaveProduct(product);
-            return RedirectToAction("ProductTable");
+            if (ModelState.IsValid)
+            {
+                _apiService.SaveProduct(product);
+                return RedirectToAction("ProductTable");
+            } else
+            {
+                return new HttpStatusCodeResult(500);
+            }
+            
         }
 
         [HttpGet]

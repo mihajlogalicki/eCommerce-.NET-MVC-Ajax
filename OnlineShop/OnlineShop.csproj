@@ -204,6 +204,10 @@
     <Compile Include="Migrations\202101290058207_addedDataValidations.Designer.cs">
       <DependentUpon>202101290058207_addedDataValidations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101290249470_AddedValidationsForProducts.cs" />
+    <Compile Include="Migrations\202101290249470_AddedValidationsForProducts.Designer.cs">
+      <DependentUpon>202101290249470_AddedValidationsForProducts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -592,6 +596,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101290058207_addedDataValidations.resx">
       <DependentUpon>202101290058207_addedDataValidations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101290249470_AddedValidationsForProducts.resx">
+      <DependentUpon>202101290249470_AddedValidationsForProducts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
