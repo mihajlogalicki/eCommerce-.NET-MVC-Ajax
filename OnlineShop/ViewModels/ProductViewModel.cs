@@ -11,6 +11,6 @@ namespace OnlineShop.ViewModels
         public int PageNo { get; set; }
         public int TotalPages { get; set; }
         public List<Product> Products { get; set; }
-        public string Search { get; set; }
+        public string SearchTerm { get; set; }
     }
 }

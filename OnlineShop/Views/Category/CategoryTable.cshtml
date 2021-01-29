@@ -1,4 +1,4 @@
-﻿@model OnlineShop.ViewModels.CategoryViewModel
+﻿@model List<Category>
 @{
     ViewBag.Title = "CategoryTable";
 }
@@ -39,7 +39,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var category in Model.Categories)
+            @foreach (var category in Model)
             {
                 <tr>
                     <td>@category.Name</td>
@@ -53,20 +53,6 @@
             }
         </tbody>
     </table>
-    @if (Model.Pager.CurrentPage > 1)
-    {
-        <button class="pageButtons">First</button>
-        <button class="pageButtons">Previous</button>
-    }
-    @for (int i = 1; i < Model.Pager.TotalPages; i++)
-    {
-        <button class="pageButtons">@i</button>
-    }
-    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
-    {
-        <button class="pageButtons">Last</button>
-        <button class="pageButtons">Next</button>
-    }
 </div>
 <script>
    $("#search-btn").click(function () {

@@ -83,7 +83,7 @@
                 <button class="pageButtons btn btn-danger" id="next-records-btn" data-pageNo="@i">@i</button>
             }
         }
-        @if (Model.PageNo <= Model.Products.Count)
+        @if (Model.PageNo < Model.TotalPages)
         {
             <button class="pageButtons btn btn-warning" id="next-records-btn" data-pageNo="@(Model.PageNo + 1)">
                 <i class="fa fa-angle-double-right fa-10x"></i>
@@ -126,7 +126,8 @@
             type: "GET",
             url: "/Product/ProductTable",
             data: {
-                PageNo: $(this).attr("data-pageNo")
+                PageNo: $(this).attr("data-pageNo"),
+                search: '@Model.SearchTerm'
             }
         }).done(function (response) {
             $('#table-container').html(response);

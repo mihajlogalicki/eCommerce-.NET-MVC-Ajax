@@ -21,19 +21,14 @@ namespace OnlineShop.Controllers
         public ActionResult ProductTable(string search, int? PageNo)
         {
             ProductViewModel model = new ProductViewModel();
+            model.SearchTerm = search;
 
             model.PageNo = PageNo.HasValue ? PageNo.Value : 1;
-            model.Products = _apiService.GetAllProducts(model.PageNo);
+            model.Products = _apiService.GetAllProducts(model.SearchTerm, model.PageNo);
            
-            if (!string.IsNullOrEmpty(search))
-            {
-                model.Search = search;
-                model.Products = model.Products.Where(p => p.Name.ToLower().Contains(search)).ToList();
-            }
-
             // Total Pages
             int pageSize = 3;
-            var productCount = _apiService.GetProductsCount();
+            var productCount = _apiService.GetProductsCount(model.SearchTerm);
             model.TotalPages = (int)Math.Ceiling((decimal)productCount / (decimal)pageSize);
             return PartialView(model);
         }

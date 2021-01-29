@@ -33,12 +33,27 @@ namespace OnlineShop.ApiServices
             }
         }
 
-        public List<Product> GetAllProducts(int pageNo)
+        public List<Product> GetAllProducts(string search, int pageNo)
         {
             int pageSize = 3;
             using (var context = new DatabaseContext())
             {
-                return context.Products.OrderBy(x => x.Id).Skip((pageNo-1)*pageSize).Take(pageSize).Include(c => c.Category).ToList();
+                if (!string.IsNullOrEmpty(search))
+                {
+                    return context.Products.Where(p => p.Name.ToLower().Contains(search))
+                         .OrderBy(x => x.Id)
+                         .Skip((pageNo - 1) * pageSize)
+                         .Take(pageSize)
+                         .Include(c => c.Category)
+                         .ToList();
+                } else
+                {
+                    return context.Products.OrderBy(x => x.Id)
+                        .Skip((pageNo - 1) * pageSize)
+                        .Take(pageSize)
+                        .Include(c => c.Category)
+                        .ToList();
+                }
             }
         }
 
@@ -50,11 +65,20 @@ namespace OnlineShop.ApiServices
             }
         }
 
-        public int GetProductsCount()
+        public int GetProductsCount(string search)
         {
             using (var context = new DatabaseContext())
             {
-                return context.Products.Count();
+                if (!string.IsNullOrEmpty(search))
+                {
+                    return context.Products.Where(p => p.Name.ToLower().Contains(search))
+                              .Include(c => c.Category)
+                              .Count();
+                }
+                else
+                {
+                    return context.Products.Count();
+                }
             }
         }
 
