@@ -10,7 +10,7 @@ namespace OnlineShop.Entities
     {
         public int Id { get; set; }
         [Required]
-        [MinLength(3), MaxLength(8)]
+        [MinLength(3), MaxLength(15)]
         public string Name { get; set; }
         [Required]
         [MinLength(10), MaxLength(80)]

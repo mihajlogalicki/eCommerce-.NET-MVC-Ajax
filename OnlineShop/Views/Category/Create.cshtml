@@ -5,23 +5,32 @@
 
 <h2>Create Category</h2>
 <form id="add-category-form">
-    <label>Name<span class="text-danger">*</span></label>
-    <input type="text" name="name" /><br />
 
-    <label>Description<span class="text-danger">*</span></label>
-    <input type="text" name="Description" /><br />
+    <div class="form-group">
+        <label>Name<span class="text-danger">*</span></label>
+        <input type="text" name="Name" class="form-control" />
+    </div>
 
-    <label>Image</label>
-    <input name="ImageUrl" id="ImageUrl" type="hidden" />
-    <input id="imageUpload" type="file" name="Image" accept=".png, .jpg" /><br />
+    <div class="form-group">
+        <label>Description<span class="text-danger">*</span></label>
+        <input type="text" name="Description" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Image</label>
+        <input name="ImageUrl" id="ImageUrl" type="hidden" />
+        <input id="imageUpload" type="file" name="Image" accept=".png, .jpg, .jpeg" class="form-control" />
+    </div>
 
     <div class="thumb">
         <img id="categoryImage" width="100" />
     </div>
 
-    <label>Is Featured ?</label>
-    <input type="radio" name="IsFeatured" value="true"/> YES
-    <input type="radio" name="IsFeatured" value="false"/> NO<br />
+    <div class="form-group">
+        <label>Is Featured ?</label>
+        <input type="radio" name="IsFeatured" value="true" class="form-control"/> YES
+        <input type="radio" name="IsFeatured" value="false" class="form-control"/> NO<br />
+    </div>
 
     <button id="save-category" type="button">Save</button>
 </form>
@@ -55,23 +64,60 @@
         });
     });
 
+    $("#add-category-form").validate({
+        rules: {
+            Name: {
+                required: true,
+                minlength: 5,
+                maxlength: 20
+            },
+            Description: {
+                required: true,
+                minlength: 5,
+                maxlength: 80
+            }
+        },
+        messages: {
+            Name: {
+                required: 'Name is required',
+                minlength: 'Minimum length is 5',
+                maxlength: 'Maximum length is 10'
+            },
+            Description: {
+                required: 'Description is required',
+                minlength: 'Minimum length is 5',
+                maxlength: 'Maximum length is 80'
+            }
+        },
+        // Called when the element is invalid:
+        highlight: function (element) {
+            $(element).css('background', '#ffdddd');
+        },
+        // Called when the element is valid:
+        unhighlight: function (element) {
+            $(element).css('background', '#ffffff');
+        }
+    });
+
     $("#save-category").click(function () {
-        $.ajax({
-            type: "POST",
-            url: "/Category/Create",
-            data: $("#add-category-form").serialize()
-        }).done(function (response) {
-            $('#table-container').html(response);
-            $('#action-container').html("");
-        })
-          .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-              swal({
-                  title: "Warning",
-                  text: "Please enter all requred fields",
-                  icon: "warning",
-                  dangerMode: true,
-              })
-        });
+        if ($("#add-category-form").valid()) {
+            $.ajax({
+                type: "POST",
+                url: "/Category/Create",
+                data: $("#add-category-form").serialize()
+            }).done(function (response) {
+                $('#table-container').html(response);
+                $('#action-container').html("");
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                swal({
+                    title: "Warning",
+                    text: "Please enter all requred fields",
+                    icon: "warning",
+                    dangerMode: true,
+                })
+            });
+        } 
     });
 </script>
 
