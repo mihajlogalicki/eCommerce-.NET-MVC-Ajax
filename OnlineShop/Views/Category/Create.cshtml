@@ -5,10 +5,10 @@
 
 <h2>Create Category</h2>
 <form id="add-category-form">
-    <label>Name</label>
+    <label>Name<span class="text-danger">*</span></label>
     <input type="text" name="name" /><br />
 
-    <label>Description</label>
+    <label>Description<span class="text-danger">*</span></label>
     <input type="text" name="Description" /><br />
 
     <label>Image</label>
@@ -64,6 +64,14 @@
             $('#table-container').html(response);
             $('#action-container').html("");
         })
+          .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+              swal({
+                  title: "Warning",
+                  text: "Please enter all requred fields",
+                  icon: "warning",
+                  dangerMode: true,
+              })
+        });
     });
 </script>
 

@@ -39,8 +39,14 @@ namespace OnlineShop.Controllers
         [HttpPost]
         public ActionResult Create(Category category)
         {
-            _apiService.SaveCategory(category);
-            return RedirectToAction("CategoryTable");
+            if (ModelState.IsValid)
+            {
+                _apiService.SaveCategory(category);
+                return RedirectToAction("CategoryTable");
+            } else
+            {
+                return new HttpStatusCodeResult(500);
+            }
         }
 
         [HttpGet] // Template Form for Edit category
