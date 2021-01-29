@@ -163,7 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiServices\CategoryServices.cs" />
-    <Compile Include="ApiServices\ConfigurationService.cs" />
     <Compile Include="ApiServices\ProductServices.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -177,6 +176,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="Database\DatabaseContext.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Config.cs" />
@@ -184,29 +184,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202101140244310_ini.cs" />
-    <Compile Include="Migrations\202101140244310_ini.Designer.cs">
-      <DependentUpon>202101140244310_ini.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101141648357_addedIsFeaturedEntity.cs" />
-    <Compile Include="Migrations\202101141648357_addedIsFeaturedEntity.Designer.cs">
-      <DependentUpon>202101141648357_addedIsFeaturedEntity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101252358456_configurations.cs" />
-    <Compile Include="Migrations\202101252358456_configurations.Designer.cs">
-      <DependentUpon>202101252358456_configurations.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101280521361_ProductImageEntity.cs" />
-    <Compile Include="Migrations\202101280521361_ProductImageEntity.Designer.cs">
-      <DependentUpon>202101280521361_ProductImageEntity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101290058207_addedDataValidations.cs" />
-    <Compile Include="Migrations\202101290058207_addedDataValidations.Designer.cs">
-      <DependentUpon>202101290058207_addedDataValidations.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101290249470_AddedValidationsForProducts.cs" />
-    <Compile Include="Migrations\202101290249470_AddedValidationsForProducts.Designer.cs">
-      <DependentUpon>202101290249470_AddedValidationsForProducts.cs</DependentUpon>
+    <Compile Include="Migrations\202101290804496_ResetAllMigration.cs" />
+    <Compile Include="Migrations\202101290804496_ResetAllMigration.Designer.cs">
+      <DependentUpon>202101290804496_ResetAllMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -218,6 +198,7 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\ShopViewModel.cs" />
+    <Compile Include="ViewModels\WidgetViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
@@ -567,6 +548,7 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Category\CategoryTable.cshtml" />
     <Content Include="Views\Shop\Checkout.cshtml" />
+    <Content Include="Views\Widgets\Products.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -582,23 +564,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101140244310_ini.resx">
-      <DependentUpon>202101140244310_ini.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101141648357_addedIsFeaturedEntity.resx">
-      <DependentUpon>202101141648357_addedIsFeaturedEntity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101252358456_configurations.resx">
-      <DependentUpon>202101252358456_configurations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101280521361_ProductImageEntity.resx">
-      <DependentUpon>202101280521361_ProductImageEntity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101290058207_addedDataValidations.resx">
-      <DependentUpon>202101290058207_addedDataValidations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101290249470_AddedValidationsForProducts.resx">
-      <DependentUpon>202101290249470_AddedValidationsForProducts.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101290804496_ResetAllMigration.resx">
+      <DependentUpon>202101290804496_ResetAllMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

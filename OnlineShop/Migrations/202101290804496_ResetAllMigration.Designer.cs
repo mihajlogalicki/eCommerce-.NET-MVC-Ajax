@@ -7,13 +7,13 @@ namespace OnlineShop.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addedIsFeaturedEntity : IMigrationMetadata
+    public sealed partial class ResetAllMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addedIsFeaturedEntity));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ResetAllMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "202101141648357_addedIsFeaturedEntity"; }
+            get { return "202101290804496_ResetAllMigration"; }
         }
         
         string IMigrationMetadata.Source

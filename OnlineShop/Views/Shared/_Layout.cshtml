@@ -1,7 +1,4 @@
-﻿@{
-    ConfigurationService configPrivateService = ConfigurationService.GetSingleInstance();
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <!-- Basic Page Needs -->
@@ -228,9 +225,9 @@
                                 <a href="index.html"><img src="images/logo@2x.png" alt="image" width="107" height="24"></a>
                             </div>
                             <ul class="flat-contact">
-                                <li class="address">@configPrivateService.GetConfig("CompanyAddress").Value;</li>
+                                <li class="address">Some Addres</li>
                                 <li class="phone">+12 345 678 910</li>
-                                <li class="email">@configPrivateService.GetConfig("CompanyEmailAddress").Value;</li>
+                                <li class="email">Some Numbers</li>
                             </ul><!-- /.flat-contact -->
                         </div><!-- /.widget -->
                     </div><!-- /.col-md-3 -->

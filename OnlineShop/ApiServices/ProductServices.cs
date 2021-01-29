@@ -58,6 +58,30 @@ namespace OnlineShop.ApiServices
             }
         }
 
+        public List<Product> GetLatestProducts(int numberOfProducts)
+        {
+            using (var context = new DatabaseContext())
+            {
+                return context.Products.OrderByDescending(x => x.Id)
+                        .Take(numberOfProducts)
+                        .Include(c => c.Category)
+                        .ToList();
+            }
+        }
+
+        public List<Product> GetProducts(int pageNo, int pageSize)
+        {
+            using (var context = new DatabaseContext())
+            {
+                return context.Products
+                     .OrderByDescending(x => x.Id)
+                     .Skip((pageNo - 1) * pageSize)
+                     .Take(pageSize)
+                     .Include(c => c.Category)
+                     .ToList();
+            }
+        }
+
         public Product GetProductById(int product)
         {
             using (var context = new DatabaseContext())
