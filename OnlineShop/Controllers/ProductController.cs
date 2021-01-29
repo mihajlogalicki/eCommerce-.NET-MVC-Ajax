@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace OnlineShop.Controllers
@@ -74,6 +75,15 @@ namespace OnlineShop.Controllers
         {
             _apiService.DeleteProduct(product);
             return RedirectToAction("ProductTable");
+        }
+
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            ProductViewModel ProductVM = new ProductViewModel();
+
+            ProductVM.Product = _apiService.GetProductById(id);
+            return View(ProductVM);
         }
     }
 }

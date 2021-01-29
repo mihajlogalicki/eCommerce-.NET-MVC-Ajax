@@ -86,7 +86,7 @@ namespace OnlineShop.ApiServices
         {
             using (var context = new DatabaseContext())
             {
-                return context.Products.Find(product);
+                return context.Products.Include(p => p.Category).FirstOrDefault(x => x.Id == product);
             }
         }
 
