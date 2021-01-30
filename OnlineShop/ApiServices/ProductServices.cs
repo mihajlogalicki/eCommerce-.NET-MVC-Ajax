@@ -69,10 +69,10 @@ namespace OnlineShop.ApiServices
                         break;
                         case 3:
                             products = context.Products.OrderBy(x => x.Price).ToList();
-                            break;
+                        break;
                         case 4:
                             products = context.Products.OrderByDescending(x => x.Price).ToList();
-                            break;
+                        break;
                     }
                 }
 
