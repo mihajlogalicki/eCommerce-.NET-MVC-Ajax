@@ -23,6 +23,14 @@ namespace OnlineShop.Controllers
             return View(ShopVM);
         }
 
+        public ActionResult ProductFilter(string search, int? minPrice, int? maxPrice, int? categoryId, int? sortBy)
+        {
+            ShopViewModel ShopVM = new ShopViewModel();
+
+            ShopVM.Products = _apiService.SearchProducts(search, minPrice, maxPrice, categoryId, sortBy);
+            return PartialView(ShopVM);
+        }
+
         public ActionResult Checkout()
         {
             ShopViewModel model = new ShopViewModel();

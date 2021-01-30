@@ -287,7 +287,6 @@
     <Content Include="Content\images\instagram\instagram-3-337x280.jpg" />
     <Content Include="Content\images\instagram\instagram-4-337x280.jpg" />
     <Content Include="Content\images\instagram\instagram-5-337x280.jpg" />
-    <Content Include="Content\images\logo%402x.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\maps\map_icon.png" />
     <Content Include="Content\images\mega-menu\1.jpg" />
@@ -553,6 +552,7 @@
     <Content Include="Views\Widgets\Products.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Shop\index.cshtml" />
+    <Content Include="Views\Shop\ProductFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

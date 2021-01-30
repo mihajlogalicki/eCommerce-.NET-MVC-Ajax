@@ -52,12 +52,12 @@ namespace OnlineShop.ApiServices
 
                 if (minPrice.HasValue)
                 {
-                    products = context.Products.Where(product => product.Price >= minPrice.Value).ToList();
+                    products = products.Where(product => product.Price >= minPrice.Value).ToList();
                 }
 
                 if (maxPrice.HasValue)
                 {
-                    products = context.Products.Where(product => product.Price <= maxPrice.Value).ToList();
+                    products = products.Where(product => product.Price <= maxPrice.Value).ToList();
                 }
 
                 if (sortBy.HasValue)
