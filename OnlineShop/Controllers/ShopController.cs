@@ -28,8 +28,8 @@ namespace OnlineShop.Controllers
             ShopVM.Products = _apiService.SearchProducts(search, pageNo.Value, minPrice, maxPrice, categoryId, sortBy);
 
             ShopVM.Pager = pageNo.Value;
-            int TotalProductCount = _apiService.GetProductsCount(search);
-            ShopVM.TotalPages = (int)Math.Ceiling((decimal)TotalProductCount / (decimal)6);
+            ShopVM.TotalProductCount = _apiService.GetProductsCount(search);
+            ShopVM.TotalPages = (int)Math.Ceiling((decimal)ShopVM.TotalProductCount / (decimal)6);
             return PartialView(ShopVM);
         }
 

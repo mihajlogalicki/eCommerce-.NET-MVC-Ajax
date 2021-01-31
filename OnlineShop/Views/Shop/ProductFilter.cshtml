@@ -68,7 +68,7 @@
             <div class="col-md-9">
                 <div class="filter-shop clearfix">
                     <p class="showing-product float-right">
-                        Showing 1–12 of 56 Products
+                        Showing @(((Model.Pager-1) * Model.PageSize) + 1) - @(((Model.Pager-1) * Model.PageSize) + Model.PageSize) of @(Model.TotalProductCount) Products
                     </p>
                 </div><!-- /.filte-shop -->
                 <div class="product-content product-threecolumn product-slidebar clearfix">
