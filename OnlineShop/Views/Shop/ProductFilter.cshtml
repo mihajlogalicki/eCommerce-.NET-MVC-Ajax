@@ -1,40 +1,203 @@
-﻿@model OnlineShop.ViewModels.ShopViewModel
+﻿@using OnlineShop.Code
+@model ShopViewModel
+@{
+    ViewBag.Title = "index";
 
-<div class="product-content product-threecolumn product-slidebar clearfix">
-    <ul class="product style2 sd1">
-        @foreach (var product in Model.Products)
-        {
-            <li class="product-item">
-                <div class="product-thumb clearfix">
-                    <a href="#">
-                        <img src="@product.ImageUrl" alt="image">
-                    </a>
-                    <span class="new">New</span>
-                </div>
-                <div class="product-info clearfix">
-                    <span class="product-title">@product.Name</span>
-                    <div class="price">
-                        <ins>
-                            <span class="amount">$ @product.Price</span>
-                        </ins>
+    string[] names = Enum.GetNames(typeof(SortByEnums));
+}
+
+<!-- Page title -->
+<div class="page-title parallax parallax1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-title-heading">
+                    <h1 class="title">SHOP</h1>
+                </div><!-- /.page-title-heading -->
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div><!-- /.page-title -->
+
+<section class="flat-row main-shop shop-slidebar">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sidebar slidebar-shop">
+                    <div class="widget widget-search">
+                        <form role="search" class="search-form">
+                            <label>
+                                <input type="text" class="search-text" placeholder="Search …" name="search">
+                            </label>
+                        </form>
+                    </div><!-- /.widget-search -->
+                    <div class="widget widget-sort-by">
+                        <h5 class="widget-title">
+                            Sort By
+                        </h5>
+                        <ul>
+                            @for (int i = 0; i < names.Length; i++)
+                            {
+                                <li><a href="#" class="enum-btn" data-id="@(i+1)">@names[i]</a></li>
+                            }
+                        </ul>
+                    </div><!-- /.widget-sort-by -->
+                    <div class="widget widget-price">
+                        <h5 class="widget-title">Filter by price</h5>
+                        <div class="price-filter">
+                            <div id="slide-range"></div>
+                            <p class="amount">
+                                Price: <input type="text" id="amount" disabled="">
+                            </p>
+                        </div>
                     </div>
+                    <div class="widget widget_tag">
+                        <h5 class="widget-title">
+                            Categories
+                        </h5>
+                        <div class="tag-list">
+                            @foreach (var category in Model.Categories)
+                            {
+                                <a class="category-btn" data-id="@category.Id">@category.Name</a>
+                            }
+                        </div>
+                    </div><!-- /.widget -->
+                </div><!-- /.sidebar -->
+            </div><!-- /.col-md-3 -->
+
+            <div class="col-md-9">
+                <div class="product-content product-threecolumn product-slidebar clearfix">
+                    <ul class="product style2 sd1">
+                        @foreach (var product in Model.Products)
+                        {
+                            <li class="product-item">
+                                <div class="product-thumb clearfix">
+                                    <a href="#">
+                                        <img src="@product.ImageUrl" alt="image">
+                                    </a>
+                                    <span class="new">New</span>
+                                </div>
+                                <div class="product-info clearfix">
+                                    <span class="product-title">@product.Name</span>
+                                    <div class="price">
+                                        <ins>
+                                            <span class="amount">$ @product.Price</span>
+                                        </ins>
+                                    </div>
+                                </div>
+                                <div class="add-to-cart text-center">
+                                    <a href="#">ADD TO CART</a>
+                                </div>
+                                <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
+                            </li>
+                        }
+                    </ul><!-- /.product -->
+                </div><!-- /.product-content -->
+                <div class="product-pagination text-center clearfix">
+                    <ul class="flat-pagination">
+                        <li class="prev">
+                            <a href="#"><i class="fa fa-angle-left"></i></a>
+                        </li>
+                        <li><a href="#">1</a></li>
+                        <li class="active"><a href="#" title="">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                    </ul><!-- /.flat-pagination -->
                 </div>
-                <div class="add-to-cart text-center">
-                    <a href="#">ADD TO CART</a>
-                </div>
-                <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
-            </li>
+                <div class="filter-shop clearfix">
+                    <p class="showing-product float-right">
+                        Showing 1–12 of 56 Products
+                    </p>
+                </div><!-- /.filte-shop -->
+            </div><!-- /.col-md-9 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</section><!-- /.flat-row -->
+
+<input id="selectedMinimumPrice" type="hidden" />
+<input id="selectedMaximumPrice" type="hidden" />
+
+<script>
+    $(".category-btn").click(function () {
+        var dataId = $(this).attr("data-id");
+        $.ajax({
+            type: "GET",
+            url: "/Shop/ProductFilter",
+            data: {
+                categoryId: dataId
+            }
+        }).done(function (response) {
+            $('#product-container').html(response);
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+    });
+
+    var callTimeout;
+
+    var priceSlider = $("#slide-range").slider({
+        range: true,
+        min: 0,
+        max: @Model.maximumPrice,
+        values: [0, @Model.maximumPrice],
+        slide: function (event, ui) {
+            var minPrice = ui.values[0];
+            var maxPrice = ui.values[1];
+            $("#amount").val("$" + minPrice + ".00" + " - " + "$" + maxPrice + ".00");
+
+            clearTimeout(callTimeout);
+            GetData, 1000);
         }
-    </ul><!-- /.product -->
-</div><!-- /.product-content -->
-<div class="product-pagination text-center clearfix">
-    <ul class="flat-pagination">
-        <li class="prev">
-            <a href="#"><i class="fa fa-angle-left"></i></a>
-        </li>
-        <li><a href="#">1</a></li>
-        <li class="active"><a href="#" title="">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-    </ul><!-- /.flat-pagination -->
-</div>
+    });
+
+    function GetData() {
+        $.ajax({
+            type: "GET",
+            url: "/Shop/ProductFilter",
+            data: {
+                minPrice: priceSlider.slider("values", 0),
+                maxPrice: priceSlider.slider("values", 1)
+        }
+        }).done(function (response) {
+            $('#product-container').html(response);
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+    }
+
+    $(".search-text").keypress(function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            var searchValue = $(".search-text").val();
+            $.ajax({
+                type: "GET",
+                url: "/Shop/ProductFilter",
+                data: {
+                    search: searchValue
+                }
+            }).done(function (response) {
+                $('#product-container').html(response);
+                $(".search-text").val('');
+            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Fail");
+            });
+        }
+    });
+
+    $(".enum-btn").click(function (e) {
+        e.preventDefault();
+        var dataId = $(this).attr("data-id");
+        $.ajax({
+            type: "GET",
+            url: "/Shop/ProductFilter",
+            data: {
+                sortBy: dataId
+            }
+        }).done(function (response) {
+            $('#product-container').html(response);
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+    });
+
+</script>
