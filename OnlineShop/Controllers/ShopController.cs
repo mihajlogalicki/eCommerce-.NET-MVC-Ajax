@@ -18,12 +18,18 @@ namespace OnlineShop.Controllers
             return View();
         }
 
-        public ActionResult ProductFilter(string search, int? minPrice, int? maxPrice, int? categoryId, int? sortBy)
+        public ActionResult ProductFilter(string search, int? pageNo, int? minPrice, int? maxPrice, int? categoryId, int? sortBy)
         {
+
             ShopViewModel ShopVM = new ShopViewModel();
+            pageNo = pageNo.HasValue ? pageNo.Value : 1;
             ShopVM.Categories = _CatApiService.GetAllCategories();
             ShopVM.maximumPrice = _apiService.GetMaximumPrice();
-            ShopVM.Products = _apiService.SearchProducts(search, minPrice, maxPrice, categoryId, sortBy);
+            ShopVM.Products = _apiService.SearchProducts(search, pageNo.Value, minPrice, maxPrice, categoryId, sortBy);
+
+            ShopVM.Pager = pageNo.Value;
+            int TotalProductCount = _apiService.GetProductsCount(search);
+            ShopVM.TotalPages = (int)Math.Ceiling((decimal)TotalProductCount / (decimal)6);
             return PartialView(ShopVM);
         }
 

@@ -34,11 +34,12 @@ namespace OnlineShop.ApiServices
             }
         }
 
-        public List<Product> SearchProducts(string search, int? minPrice, int? maxPrice, int? categoryId, int? sortBy)
+        public List<Product> SearchProducts(string search, int pageNo, int? minPrice, int? maxPrice, int? categoryId, int? sortBy)
         {
+            int pageSize = 6;
             using (var context = new DatabaseContext())
             {
-                var products = context.Products.ToList();
+                var products = context.Products.OrderBy(x => x.Id).ToList();
 
                 if (categoryId.HasValue)
                 {
@@ -76,7 +77,7 @@ namespace OnlineShop.ApiServices
                     }
                 }
 
-                return products;
+                return products.Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
             }
         }
 

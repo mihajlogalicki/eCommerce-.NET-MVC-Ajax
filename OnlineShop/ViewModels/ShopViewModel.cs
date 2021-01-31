@@ -15,5 +15,7 @@ namespace OnlineShop.ViewModels
         public List<Category> Categories { get; set; }
         public decimal maximumPrice { get; set; }
         public int? CategoryId { get; set; }
+        public int Pager { get; set; }
+        public int TotalPages { get; set; }
     }
 }
