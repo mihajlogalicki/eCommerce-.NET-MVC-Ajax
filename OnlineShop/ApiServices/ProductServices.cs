@@ -137,7 +137,7 @@ namespace OnlineShop.ApiServices
             }
         }
 
-        public int GetProductsCount(string search)
+        public int GetProductsCount(string search, int? categoryId, int? sortBy)
         {
             using (var context = new DatabaseContext())
             {
@@ -147,10 +147,24 @@ namespace OnlineShop.ApiServices
                               .Include(c => c.Category)
                               .Count();
                 }
-                else
+                if (categoryId.HasValue)
                 {
-                    return context.Products.Count();
+                    return context.Products.Where(c => c.Category.Id == categoryId.Value)
+                                  .Count();
                 }
+                if (sortBy.HasValue)
+                {
+                    switch (sortBy.Value)
+                    {
+                        case 2:
+                            return context.Products.OrderByDescending(x => x.Id).Count();
+                        case 3:
+                            return context.Products.OrderBy(x => x.Price).Count();
+                        case 4:
+                            return context.Products.OrderByDescending(x => x.Price).Count();
+                    }
+                }
+                return context.Products.Count();
             }
         }
 

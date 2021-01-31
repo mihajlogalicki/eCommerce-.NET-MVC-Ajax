@@ -96,6 +96,8 @@
 <script>
     $("#search-btn").click(function () {
         var searchValue = $("#search-text").val();
+        $.cookie('cookie-product', searchValue);
+
         $.ajax({
             type: "GET",
             url: "/Product/ProductTable",
@@ -127,7 +129,7 @@
             url: "/Product/ProductTable",
             data: {
                 PageNo: $(this).attr("data-pageNo"),
-                search: '@Model.SearchTerm'
+                search: $.cookie('cookie-product') 
             }
         }).done(function (response) {
             $('#table-container').html(response);

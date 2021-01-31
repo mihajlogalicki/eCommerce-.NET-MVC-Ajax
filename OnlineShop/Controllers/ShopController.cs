@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace OnlineShop.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ShopController : Controller
     {
         private readonly ProductServices _apiService = ProductServices.GetSingleInstance();
@@ -27,9 +27,8 @@ namespace OnlineShop.Controllers
             ShopVM.Categories = _CatApiService.GetAllCategories();
             ShopVM.maximumPrice = _apiService.GetMaximumPrice();
             ShopVM.Products = _apiService.SearchProducts(search, pageNo.Value, minPrice, maxPrice, categoryId, sortBy);
-
-            ShopVM.Pager = pageNo.Value;
-            ShopVM.TotalProductCount = _apiService.GetProductsCount(search);
+            
+            ShopVM.TotalProductCount = _apiService.GetProductsCount(search, categoryId, sortBy);
             ShopVM.TotalPages = (int)Math.Ceiling((decimal)ShopVM.TotalProductCount / (decimal)6);
             return PartialView(ShopVM);
         }

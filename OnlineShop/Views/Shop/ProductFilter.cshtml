@@ -134,44 +134,8 @@
     </div><!-- /.container -->
 </section><!-- /.flat-row -->
 
-<input id="selectedMinimumPrice" type="hidden" />
-<input id="selectedMaximumPrice" type="hidden" />
-
 <script>
-    $(".pageButtons").click(function (e) {
-        e.preventDefault();
-        var btnPage = $(this).attr("data-page-number");
-        $.ajax({
-            type: "GET",
-            url: "/Shop/ProductFilter",
-            data: {
-                pageNo: btnPage
-            }
-        }).done(function (response) {
-            $('#product-container').html(response);
-            focusAction();
-        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("Fail");
-        });
-    });
-
-    $(".category-btn").click(function () {
-        var dataId = $(this).attr("data-id");
-        $.ajax({
-            type: "GET",
-            url: "/Shop/ProductFilter",
-            data: {
-                categoryId: dataId
-            }
-        }).done(function (response) {
-            $('#product-container').html(response);
-        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("Fail");
-        });
-    });
-
     var callTimeout;
-
     var priceSlider = $("#slide-range").slider({
         range: true,
         min: 0,
@@ -183,8 +147,46 @@
             $("#amount").val("$" + minPrice + ".00" + " - " + "$" + maxPrice + ".00");
 
             clearTimeout(callTimeout);
-            callTimeout = setTimeout(GetData, 1000);
+            callTimeout = setTimeout(GetData, 500);
         }
+    });
+
+    $(".pageButtons").click(function (e) {
+        var btnPage = $(this).attr("data-page-number");
+        $.ajax({
+            type: "GET",
+            url: "/Shop/ProductFilter",
+            data: {
+                pageNo: btnPage,
+                search: localStorage.getItem('search-product'),
+                sortBy: localStorage.getItem('enum-id'),
+                categoryId: localStorage.getItem('category-id')
+            }
+        }).done(function (response) {
+            $('#product-container').html(response);
+            focusAction();
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+    });
+
+    $(".category-btn").click(function () {
+        var dataId = $(this).attr("data-id");
+        localStorage.setItem('category-id', dataId);
+
+        $.ajax({
+            type: "GET",
+            url: "/Shop/ProductFilter",
+            data: {
+                categoryId: dataId
+            }
+        }).done(function (response) {
+            $('#product-container').html(response);
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+        localStorage.removeItem('enum-id');
+        localStorage.removeItem('search-product');
     });
 
     function GetData() {
@@ -206,6 +208,8 @@
         if (e.which == 13) {
             e.preventDefault();
             var searchValue = $(".search-text").val();
+            localStorage.setItem('search-product', searchValue);
+
             $.ajax({
                 type: "GET",
                 url: "/Shop/ProductFilter",
@@ -219,11 +223,15 @@
                 alert("Fail");
             });
         }
+        localStorage.removeItem('enum-id');
+        localStorage.removeItem('category-id');
     });
 
     $(".enum-btn").click(function (e) {
         e.preventDefault();
         var dataId = $(this).attr("data-id");
+        localStorage.setItem('enum-id', dataId);
+
         $.ajax({
             type: "GET",
             url: "/Shop/ProductFilter",
@@ -235,12 +243,14 @@
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Fail");
         });
+        localStorage.removeItem('category-id');
+        localStorage.removeItem('search-product');
     });
 
     function focusAction() {
         $('html, body').animate({
-            scrollTop: $("#product-container").offset().top - 1
-        }, 1400);
+            scrollTop: $("#product-container").offset().top - -100
+        }, 500);
     }
 
 </script>

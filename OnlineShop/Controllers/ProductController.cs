@@ -19,7 +19,7 @@ namespace OnlineShop.Controllers
             return View();
         }
 
-        public ActionResult ProductTable(string search, int? PageNo)
+        public ActionResult ProductTable(string search, int? PageNo, int? categoryId, int? sortBy)
         {
             ProductViewModel model = new ProductViewModel();
             model.SearchTerm = search;
@@ -29,7 +29,7 @@ namespace OnlineShop.Controllers
            
             // Total Pages
             int pageSize = 3;
-            var productCount = _apiService.GetProductsCount(model.SearchTerm);
+            var productCount = _apiService.GetProductsCount(model.SearchTerm, categoryId, sortBy);
             model.TotalPages = (int)Math.Ceiling((decimal)productCount / (decimal)pageSize);
             return PartialView(model);
         }
