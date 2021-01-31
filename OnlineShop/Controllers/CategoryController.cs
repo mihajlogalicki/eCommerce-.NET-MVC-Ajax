@@ -8,6 +8,7 @@ using OnlineShop.ApiServices;
 
 namespace OnlineShop.Controllers
 {
+    //[Authorize(Roles ="Admin")]
     public class CategoryController : Controller
     {
         private readonly CategoryServices _apiService = new CategoryServices(); 

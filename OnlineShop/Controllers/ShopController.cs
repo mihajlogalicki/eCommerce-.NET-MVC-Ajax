@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace OnlineShop.Controllers
 {
+    [Authorize]
     public class ShopController : Controller
     {
         private readonly ProductServices _apiService = ProductServices.GetSingleInstance();
