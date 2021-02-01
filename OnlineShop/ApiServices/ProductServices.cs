@@ -198,7 +198,7 @@ namespace OnlineShop.ApiServices
         {
             using (var context = new DatabaseContext())
             {
-                return (int)(context.Products.Max(x => x.Price));
+                return context.Products.Count() > 0 ? (int)(context.Products.Max(x => x.Price)) : 00;
             }
         }
     }

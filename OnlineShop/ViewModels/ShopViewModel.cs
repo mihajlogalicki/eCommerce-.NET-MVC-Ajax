@@ -1,4 +1,5 @@
 ﻿using OnlineShop.Entities;
+using OnlineShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,7 @@ namespace OnlineShop.ViewModels
         public int PageSize { get; set; } = 6;
         public int TotalPages { get; set; }
         public int TotalProductCount {get; set;}
+
+        public ApplicationUser User { get; set; }
     }
 }

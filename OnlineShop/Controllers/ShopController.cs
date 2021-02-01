@@ -1,4 +1,6 @@
-﻿using OnlineShop.ApiServices;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using OnlineShop.ApiServices;
 using OnlineShop.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,31 @@ namespace OnlineShop.Controllers
     {
         private readonly ProductServices _apiService = ProductServices.GetSingleInstance();
         private readonly CategoryServices _CatApiService = new CategoryServices();
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         public ActionResult index()
         {
@@ -33,6 +60,7 @@ namespace OnlineShop.Controllers
             return PartialView(ShopVM);
         }
 
+        [Authorize]
         public ActionResult Checkout()
         {
             ShopViewModel model = new ShopViewModel();
@@ -42,6 +70,8 @@ namespace OnlineShop.Controllers
             {
                 model.CartProudctsIDs = CookieCartItems.Value.Split('-').Select(x => int.Parse(x)).ToList();
                 model.CartProducts = _apiService.GetProductsByIDs(model.CartProudctsIDs);
+
+                model.User = UserManager.FindById(User.Identity.GetUserId());
             }
             return View(model);
         }

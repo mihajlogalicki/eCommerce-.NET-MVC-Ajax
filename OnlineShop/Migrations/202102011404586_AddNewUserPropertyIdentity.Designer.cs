@@ -7,13 +7,13 @@ namespace OnlineShop.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class ResetAllMigration : IMigrationMetadata
+    public sealed partial class AddNewUserPropertyIdentity : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ResetAllMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddNewUserPropertyIdentity));
         
         string IMigrationMetadata.Id
         {
-            get { return "202101290804496_ResetAllMigration"; }
+            get { return "202102011404586_AddNewUserPropertyIdentity"; }
         }
         
         string IMigrationMetadata.Source

@@ -18,6 +18,9 @@
     </div><!-- /.container -->
 </div><!-- /.page-title -->
 
+
+@if (Model.Products.Count > 0)
+{
 <section class="flat-row main-shop shop-slidebar">
     <div class="container">
         <div class="row">
@@ -132,6 +135,11 @@
         </div><!-- /.row -->
     </div><!-- /.container -->
 </section><!-- /.flat-row -->
+} 
+else 
+{
+<div>No Products Yet</div>
+}
 
 <script>
     var callTimeout;
@@ -252,4 +260,25 @@
         }, 500);
     }
 
+    var products;
+
+    $(".product-add-to-cart").click(function () {
+
+        var product = $(this).attr('data-id');
+
+        var existingCookieData = $.cookie("CartProducts");
+
+        if (existingCookieData != undefined && existingCookieData != "" && existingCookieData != null) {
+            products = existingCookieData.split('-');
+        }
+        else {
+            products = [];
+        }
+        
+        products.push(product);
+        $.cookie("CartProducts", products.join('-'), { path: '/' });
+        updateCart();
+        swal("Done", "Product Added to Cart", "success");
+        
+    });
 </script>

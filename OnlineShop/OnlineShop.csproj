@@ -185,9 +185,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202101290804496_ResetAllMigration.cs" />
-    <Compile Include="Migrations\202101290804496_ResetAllMigration.Designer.cs">
-      <DependentUpon>202101290804496_ResetAllMigration.cs</DependentUpon>
+    <Compile Include="Migrations\202102011404586_AddNewUserPropertyIdentity.cs" />
+    <Compile Include="Migrations\202102011404586_AddNewUserPropertyIdentity.Designer.cs">
+      <DependentUpon>202102011404586_AddNewUserPropertyIdentity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -568,8 +568,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101290804496_ResetAllMigration.resx">
-      <DependentUpon>202101290804496_ResetAllMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202102011404586_AddNewUserPropertyIdentity.resx">
+      <DependentUpon>202102011404586_AddNewUserPropertyIdentity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

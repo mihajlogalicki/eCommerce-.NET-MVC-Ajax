@@ -3,7 +3,7 @@ namespace OnlineShop.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ResetAllMigration : DbMigration
+    public partial class AddNewUserPropertyIdentity : DbMigration
     {
         public override void Up()
         {
