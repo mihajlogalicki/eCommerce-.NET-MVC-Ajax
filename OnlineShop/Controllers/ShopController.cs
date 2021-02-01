@@ -23,10 +23,10 @@ namespace OnlineShop.Controllers
         {
 
             ShopViewModel ShopVM = new ShopViewModel();
-            pageNo = pageNo.HasValue ? pageNo.Value : 1;
+            ShopVM.Pager = pageNo.HasValue ? pageNo.Value : 1;
             ShopVM.Categories = _CatApiService.GetAllCategories();
             ShopVM.maximumPrice = _apiService.GetMaximumPrice();
-            ShopVM.Products = _apiService.SearchProducts(search, pageNo.Value, minPrice, maxPrice, categoryId, sortBy);
+            ShopVM.Products = _apiService.SearchProducts(search, ShopVM.Pager, minPrice, maxPrice, categoryId, sortBy);
             
             ShopVM.TotalProductCount = _apiService.GetProductsCount(search, categoryId, sortBy);
             ShopVM.TotalPages = (int)Math.Ceiling((decimal)ShopVM.TotalProductCount / (decimal)6);
