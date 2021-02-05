@@ -181,6 +181,8 @@
     <Compile Include="Database\DatabaseContext.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Config.cs" />
+    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderItem.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -188,6 +190,10 @@
     <Compile Include="Migrations\202102011404586_AddNewUserPropertyIdentity.cs" />
     <Compile Include="Migrations\202102011404586_AddNewUserPropertyIdentity.Designer.cs">
       <DependentUpon>202102011404586_AddNewUserPropertyIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102051232091_AddedOrderAndOrderItemsEntities.cs" />
+    <Compile Include="Migrations\202102051232091_AddedOrderAndOrderItemsEntities.Designer.cs">
+      <DependentUpon>202102051232091_AddedOrderAndOrderItemsEntities.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -570,6 +576,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202102011404586_AddNewUserPropertyIdentity.resx">
       <DependentUpon>202102011404586_AddNewUserPropertyIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102051232091_AddedOrderAndOrderItemsEntities.resx">
+      <DependentUpon>202102051232091_AddedOrderAndOrderItemsEntities.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
