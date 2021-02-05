@@ -164,6 +164,7 @@
   <ItemGroup>
     <Compile Include="ApiServices\CategoryServices.cs" />
     <Compile Include="ApiServices\ProductServices.cs" />
+    <Compile Include="ApiServices\ShopService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -194,6 +195,10 @@
     <Compile Include="Migrations\202102051232091_AddedOrderAndOrderItemsEntities.cs" />
     <Compile Include="Migrations\202102051232091_AddedOrderAndOrderItemsEntities.Designer.cs">
       <DependentUpon>202102051232091_AddedOrderAndOrderItemsEntities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102051438095_AddedQuantityOrderItems.cs" />
+    <Compile Include="Migrations\202102051438095_AddedQuantityOrderItems.Designer.cs">
+      <DependentUpon>202102051438095_AddedQuantityOrderItems.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -579,6 +584,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102051232091_AddedOrderAndOrderItemsEntities.resx">
       <DependentUpon>202102051232091_AddedOrderAndOrderItemsEntities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102051438095_AddedQuantityOrderItems.resx">
+      <DependentUpon>202102051438095_AddedQuantityOrderItems.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -20,7 +20,7 @@
                         
                         var qty = Model.CartProudctsIDs.Where(x => x == product.Id).Count();
                         totalBill += (qty * product.Price);
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <li data-id="@product.Id" class="list-group-item d-flex justify-content-between lh-condensed">
                         <div>
                             <h6 class="my-0">@product.Name</h6>
                         </div>
@@ -56,7 +56,7 @@
                     </div>
 
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                    <button id="order-btn" class="btn btn-primary btn-lg btn-block" type="button">Please Order</button>
                 </form>
             </div>
         </div>
@@ -67,6 +67,29 @@ else
 {
     <div>No Products in Cart.</div>
 }
+<script>
+    $("#order-btn").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Shop/Ordering",
+            data: {
+                productIds: $.cookie('CartProducts')
+            }
+        }).done(function (response) {
+            if (response.Success) {
+                $.cookie("CartProducts", '', { path: '/' });
+                updateCart();
+                swal("Done", "Your Order has been placed!", "success").then((value) => {
+                    window.location = "/Shop";
+                });
+            } else {
+                swal("Failed", "Unable to place order.", "warning");
+            }
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+    });
+</script>
 
 
 
