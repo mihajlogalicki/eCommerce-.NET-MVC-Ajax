@@ -25,7 +25,7 @@
 - .NET Identity Authentication.
 - Current Log User Identity.
 - View and PartialView for preventing duplicate HTML jQuery Ajax.
-<img src="screenshots/Screenshot_1.png">
-<img src="screenshots/Screenshot_2.png">
-<img src="screenshots/Screenshot_3.png">
-<img src="screenshots/Screenshot_4.png">
+<img src="OnlineShop/screenshots/Screenshot_1.png">
+<img src="OnlineShop/screenshots/Screenshot_2.png">
+<img src="OnlineShop/screenshots/Screenshot_3.png">
+<img src="OnlineShop/screenshots/Screenshot_4.png">
