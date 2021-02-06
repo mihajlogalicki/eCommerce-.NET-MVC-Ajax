@@ -26,9 +26,9 @@
 - Current Log User Identity.
 - View and PartialView for preventing duplicate HTML jQuery Ajax.
 <img src="OnlineShop/screenshots/Screenshot_1.png">
-~$ hr -
+
 <img src="OnlineShop/screenshots/Screenshot_2.png">
-~$ hr -
+
 <img src="OnlineShop/screenshots/Screenshot_3.png">
-~$ hr -
+
 <img src="OnlineShop/screenshots/Screenshot_4.png">
