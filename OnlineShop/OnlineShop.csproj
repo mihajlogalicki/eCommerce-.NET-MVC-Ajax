@@ -422,13 +422,9 @@
     <Content Include="Content\images\shop\sh-detail\thumb-detail-10.jpg" />
     <Content Include="Content\images\shop\sh-detail\thumb-detail-11.jpg" />
     <Content Include="Content\images\shop\sh-detail\thumb-detail-12.jpg" />
-    <Content Include="Content\images\slider\slider-bg-1.jpg" />
-    <Content Include="Content\images\slider\slider-bg-2.jpg" />
-    <Content Include="Content\images\slider\slider-bg-3.jpg" />
-    <Content Include="Content\images\slider\slider-bg-4.jpg" />
-    <Content Include="Content\images\slider\slider-bg-5.jpg" />
-    <Content Include="Content\images\slider\slider-bg-7.jpg" />
-    <Content Include="Content\images\slider\slider-bg-8.jpg" />
+    <Content Include="Content\images\slider-1.jpg" />
+    <Content Include="Content\images\slider-2.jpg" />
+    <Content Include="Content\images\slider-3.jpg" />
     <Content Include="Content\images\wordpress-version.png" />
     <Content Include="Content\javascript\bootstrap.min.js" />
     <Content Include="Content\javascript\equalize.min.js" />
@@ -568,6 +564,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\about\" />
+    <Folder Include="Content\images\slider\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
