@@ -58,7 +58,6 @@
                     <td>
                         <button class="edit-btn" data-id="@product.Id">Edit</button>
                         <button class="delete-btn" data-id="@product.Id">Delete</button>
-                        <button class="add-to-cart" data-id="@product.Id">Add To Cart</button>
                     </td>
                 </tr>
             }
@@ -182,14 +181,6 @@
             swal("Your Product is safe!");
         }
       });
-    });
-
-    var products = [];
-
-    $(".add-to-cart").click(function () {
-        var product = $(this).attr('data-id');
-        products.push(product);
-        $.cookie("CartProducts", products.join('-'), {path: '/'});
     });
 
     function focusAction() {

@@ -52,7 +52,9 @@
                     <ul class="menu-extra">
                         @if (User.Identity.IsAuthenticated)
                         {
+                            <li style="margin-right: 12px;"><a href="/Order"><i class="fa fa-line-chart fa-2x"></i></a></li>
                             @User.Identity.Name;
+
                         }
                         else
                         {
